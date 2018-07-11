@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+// map과 filter 구현하기
+var users = [
+    {id: 1, name: 'AA', age: 36},
+    {id: 2, name: 'BB', age: 31},
+    {id: 3, name: 'CC', age: 32},
+    {id: 4, name: 'DD', age: 32},
+    {id: 5, name: 'EE', age: 19},
+    {id: 6, name: 'FF', age: 30},
+    {id: 7, name: 'GG', age: 27},
+    {id: 8, name: 'HH', age: 33},
+    {id: 9, name: 'II', age: 38},
+    {id: 10, name: 'JJ', age: 26},
+    {id: 111, name: 'KK', age: 16},
+];
+
+// 30세 이상인 users를 거른다.
+var over_30 = [];
+for(let i = 0; i < users.length; i++) {
+    if(users[i].age >= 30)
+        over_30.push(users[i]);
+}
+console.log(over_30);
+
+// 30세 이상인 users의 names를 수집한다.
+var over_30_name = [];
+for(let i = 0; i < users.length; i++) {
+    if(users[i].age >= 30)
+        over_30_name.push(users[i].name);
+}
+console.log(over_30_name);
+
+// 30세 미만인 users를 거른다.
+var under_30 = [];
+for(let i = 0; i < users.length; i++) {
+    if(users[i].age < 30)
+        under_30.push(users[i]);
+}
+console.log(under_30);
+
+function _filter(arr, predi) {
+    var new_list = [];
+    for(let i = 0; i < arr.length; i++) {
+        if(predi(arr[i])) {
+            new_list.push(arr[i]);
+        }
+    }
+    return new_list;
+}
+var over_30 = _filter(users, function(user) { return user.age >= 30; });
+console.log(over_30);
+
+function _map(arr, mapper) {
+    var new_list = [];
+    for(let i = 0; i < arr.length; i++) {
+        new_list.push(mapper(arr[i]));
+    }
+    return new_list;
+}
+var user_names = _map(users, function(user) { return user.name; });
+console.log(user_names);
+var user_age = _map(users, function(user) { return user.age; });
+console.log(user_age);
+
+console.log(_map(_filter(users, function(user) { return user.age >= 30; }), function(user) { return user.age; }));
+
+
+</script>
+
+</body>
+</html>

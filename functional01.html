@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        /**
+         * 함수형 프로그래밍
+         * 순수함수로 만들고, (순수함수란 동일한 input값은 동일한 output이 나온다. 또한, 외부에 영향을 미치지 않는 함수를 말한다.)
+         * 추상화를 높여, 모듈화 수준을 높인다.
+         */
+
+        // example #1
+        // 순수 함수 O
+        function add(a, b) {
+            return a + b;
+        }
+
+        // 순수 함수 X
+        function add2(a, b) {
+            return a + b + c; //외부 변수 c에 따라 값이 변경
+        }
+
+        // 순수 함수 X
+        function add3(a, b) {
+            c = b;
+            return a + b; //외부에 영향을 미침
+        }
+
+
+        // example #2
+        // 순수 함수 X
+        var obj1 = {
+            val: 10
+        };
+
+        function add4(obj1, b) {
+            obj1.val += b;
+        }
+
+        // 순수 함수 O
+        var obj1 = {
+            val: 10
+        };
+
+        function add5(obj1, b) {
+            return {
+                val: obj1.val + b
+            };
+        }
+
+
+        /**
+         * 일급함수
+         * 함수를 값으로 사용할 수 있다. (변수에 함수를 담을 수 있다.)
+         * 함수를 인자로 다룰 수 있다.
+         */
+        function f3(func) {
+            return func();
+        }
+        console.log(f3(function () {
+            return 10;
+        }));
+
+        // 일급함수와 클로저 개념을 사용함
+        function add_maker(a) {
+            return function (b) {
+                return a + b;
+            }
+        }
+        var add10 = add_maker(10);
+        console.log(add10(20));
+    </script>
+</body>
+
+</html>
